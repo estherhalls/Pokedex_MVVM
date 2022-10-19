@@ -15,18 +15,18 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkingController.fetchPokedex(with: NetworkingController.initalURL!) { result in
-            switch result {
-            case .success(let pokedex):
-                self.pokedex = pokedex
-                self.pokedexResults = pokedex.results
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print("There was an error!", error.errorDescription!)
-            }
-        }
+//        NetworkingController.fetchPokedex(with: NetworkingController.initalURL!) { result in
+//            switch result {
+//            case .success(let pokedex):
+//                self.pokedex = pokedex
+//                self.pokedexResults = pokedex.results
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print("There was an error!", error.errorDescription!)
+//            }
+//        }
     }
     
     // MARK: - Table view data source
