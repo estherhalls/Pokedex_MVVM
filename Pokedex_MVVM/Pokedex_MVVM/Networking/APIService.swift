@@ -10,7 +10,7 @@ import Foundation
 ///Network Service for our Fetch Call
 struct APIService {
 
-     func perform(_ request: URLRequest, completion: @escaping (Result<Data, ResultError>) -> Void) {
+     func perform(_ request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         // Data Task
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error {
@@ -21,7 +21,7 @@ struct APIService {
             }
             //Check for Data
             guard let data else {
-                completion(.failure(.noData))
+                completion(.failure(.errorDecoding))
                 return
             }
             completion(.success(data))
