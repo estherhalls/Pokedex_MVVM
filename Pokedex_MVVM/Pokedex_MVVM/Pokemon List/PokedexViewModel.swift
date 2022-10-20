@@ -6,3 +6,13 @@
 //
 
 import Foundation
+protocol PokedexViewModelDelegate: AnyObject {
+    
+}
+class PokedexViewModel {
+    
+    weak var delegate: PokedexViewModelDelegate
+    init(delegate: PokedexViewModelDelegate) {
+        self.delegate = delegate
+    }
+}

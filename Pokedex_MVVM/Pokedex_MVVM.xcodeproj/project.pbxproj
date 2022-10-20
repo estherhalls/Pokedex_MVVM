@@ -25,6 +25,7 @@
 		EBEA7B452901BD6C00F6123F /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA7B442901BD6C00F6123F /* PokemonDetailViewModel.swift */; };
 		EBEA7B472901BE6A00F6123F /* PokemonEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA7B462901BE6A00F6123F /* PokemonEndpoint.swift */; };
 		EBEA7B492901BE9700F6123F /* PokedexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA7B482901BE9700F6123F /* PokedexViewModel.swift */; };
+		EBEA7B4B2901CF3100F6123F /* PokedexSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA7B4A2901CF3100F6123F /* PokedexSearchService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		EBEA7B442901BD6C00F6123F /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		EBEA7B462901BE6A00F6123F /* PokemonEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEndpoint.swift; sourceTree = "<group>"; };
 		EBEA7B482901BE9700F6123F /* PokedexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexViewModel.swift; sourceTree = "<group>"; };
+		EBEA7B4A2901CF3100F6123F /* PokedexSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexSearchService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			children = (
 				EBEA7B3C2901B84400F6123F /* PokemonList.storyboard */,
 				EBEA7B482901BE9700F6123F /* PokedexViewModel.swift */,
+				EBEA7B4A2901CF3100F6123F /* PokedexSearchService.swift */,
 				41978FAB27BD4226001CB2C0 /* PokedexTableViewController.swift */,
 				EBEA7B412901BCF900F6123F /* Custom Cell */,
 			);
@@ -245,6 +248,7 @@
 				EBEA7B2F290089A200F6123F /* APIService.swift in Sources */,
 				41978FAC27BD4226001CB2C0 /* PokedexTableViewController.swift in Sources */,
 				EBEA7B492901BE9700F6123F /* PokedexViewModel.swift in Sources */,
+				EBEA7B4B2901CF3100F6123F /* PokedexSearchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
