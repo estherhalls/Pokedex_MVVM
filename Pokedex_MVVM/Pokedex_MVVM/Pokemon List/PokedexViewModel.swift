@@ -8,7 +8,7 @@
 import Foundation
 protocol PokedexViewModelDelegate: AnyObject {
     func pokedexResultsLoaded()
-    func encounteredAlert(error:error)
+    func errorAlert(_error: error)
     
 }
 class PokedexViewModel {
