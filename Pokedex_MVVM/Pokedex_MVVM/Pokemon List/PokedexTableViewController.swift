@@ -24,9 +24,8 @@ class PokedexTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as? PokemonTableViewCell else {return UITableViewCell()}
-        
-        cell.viewModel = PokemonViewModel(pokedex: pokedexViewModel.pokedexResults[indexPath.row], delegate: cell)
-        
+        let pokedex = pokedexViewModel.pokedexResults[indexPath.row]
+        cell.viewModel = PokemonViewModel(pokedex: pokedex, delegate: cell)
         return cell
     }
     
