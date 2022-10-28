@@ -5,8 +5,14 @@
 //  Created by Esther on 10/20/22.
 //
 
-import Foundation
+import UIKit
 
 class PokemonDetailViewModel {
+    var pokemon: Pokemon
+    var spriteImage: UIImage?
     
+    init(pokemon: Pokemon, spriteImage: UIImage?) {
+        self.pokemon = pokemon
+        self.spriteImage = spriteImage
+    }
 }
