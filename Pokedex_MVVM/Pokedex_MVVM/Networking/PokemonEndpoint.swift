@@ -15,7 +15,7 @@ enum PokemonEndpoint {
     /// needs  a URL component to be added to baseURL
     case pokemon(String)
     /// needs a nextURL from within the pokemon object
-    case imageURL(URL)
+    case nextURL(URL)
     
     var endpoint: String {
         switch self {
@@ -23,7 +23,7 @@ enum PokemonEndpoint {
             return "name"
         case .pokemon:
             return "status"
-        case .imageURL:
+        case .nextURL:
             return "nextURL"
         }
     }
@@ -39,7 +39,7 @@ enum PokemonEndpoint {
         case .pokemon(let pokemon):
             baseURL.appendPathComponent(pokemon)
             return baseURL
-        case .imageURL(let nextURL):
+        case .nextURL(let nextURL):
             return nextURL
         }
     }

@@ -8,12 +8,12 @@
 import Foundation
 protocol PokedexViewModelDelegate: AnyObject {
     func pokedexResultsLoaded()
-    func errorAlert(_error: error)
+    func errorAlert(_ error: Error)
     
 }
 class PokedexViewModel {
     var pokedex: Pokedex?
-    var pokedexResults: [PokemonResults]
+    var pokedexResults: [PokemonResults] = []
     private let pokedexService: PokedexServiceable
     weak var delegate: PokedexViewModelDelegate?
     
@@ -24,11 +24,21 @@ class PokedexViewModel {
         loadPokedexResults()
     }
     
+    // MARK: - Methods
     func loadPokedexResults() {
         pokedexService.fetch(from: .pokedex) { [weak self] result in
             self?.handle(pokedex: result)
         }
     }
+    
+    func nextURL() {
+        guard let pokedex,
+              let nextURL = URL(string: pokedex.next) else {return}
+        pokedexService.fetch(from: .nextURL(nextURL)) { [weak self] result in
+            self?.handle(pokedex: result)
+        }
+    }
+    /// called in func nextPage to succeed with call or display error alert via  delegate
     private func handle(pokedex result: Result<Pokedex, NetworkError>) {
         DispatchQueue.main.async {
             switch result {
@@ -39,8 +49,9 @@ class PokedexViewModel {
             case .failure(let error):
                 print ("Error fetching data",
                 error.localizedDescription)
-                self.delegate?.encounteredAlert(error)
+                self.delegate?.errorAlert(error)
             }
         }
     }
+    
 }

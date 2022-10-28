@@ -33,43 +33,37 @@ class PokedexTableViewController: UITableViewController {
     //MARK: - Pagination
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let pokedexViewModel = pokedexViewModel,
+              let pokedex = pokedexViewModel.pokedex else {return}
         
-        let lastPokedexIndex = pokedexResults.count - 1
-        guard let pokedex = pokedex, let nextURL = URL(string: pokedex.next) else {return}
+        let lastPokedexIndex = pokedex.results.count - 1
         
         if indexPath.row == lastPokedexIndex {
-            NetworkingController.fetchPokedex(with: nextURL) { result in
-                switch result {
-                case .success(let pokedex):
-                    self.pokedex = pokedex
-                    self.pokedexResults.append(contentsOf: pokedex.results)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                case .failure(let error):
-                    print("There was an error!", error.errorDescription!)
-                }
-            }
+            pokedexViewModel.nextURL()
         }
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPokemonDetails",
-           let destinationVC = segue.destination as? PokemonViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let pokemonToSend = self.pokedexResults[indexPath.row]
-                NetworkingController.fetchPokemon(with: pokemonToSend.url) { result in
-                    switch result {
-                    case .success(let pokemon):
-                        DispatchQueue.main.async {
-                            destinationVC.pokemon = pokemon
-                        }
-                    case .failure(let error):
-                        print("There was an error!", error.errorDescription!)
-                    }
-                }
-            }
-        }
+        guard segue.identifier == "toPokemonDetails",
+              let destinationVC = segue.destination as? PokemonViewController,
+              let cell = sender as? PokemonTableViewCell,
+              let pokemonToSend = cell.viewModel.pokemon else {return}
+        let sprite = cell.pokemonImageView.image
+        destinationVC.viewModel = PokemonDetailViewModel(pokemon: pokemonToSend, image: sprite)
+    }
+} // End of Class
+
+extension PokedexTableViewController: PokedexViewModelDelegate {
+    func pokedexResultsLoaded() {
+        tableView.reloadData()
+    }
+    func errorAlert(_ error: Error) {
+        let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { [weak self] _ in
+            self?.pokedexViewModel?.loadPokedexResults()
+        }))
+        present(alertController, animated: true)
     }
 }
