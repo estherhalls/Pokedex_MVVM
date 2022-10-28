@@ -15,7 +15,7 @@ class PokemonTableViewCell: UITableViewCell {
     @IBOutlet weak var pokemonIDLabel: UILabel!
     
     // Cell view model
-    var viewModel: PokemonViewModel
+    var viewModel: PokemonViewModel!
     
     override func prepareForReuse() {
         super.prepareForReuse()

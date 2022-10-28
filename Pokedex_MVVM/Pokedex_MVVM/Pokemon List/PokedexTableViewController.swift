@@ -50,7 +50,7 @@ class PokedexTableViewController: UITableViewController {
               let cell = sender as? PokemonTableViewCell,
               let pokemonToSend = cell.viewModel.pokemon else {return}
         let sprite = cell.pokemonImageView.image
-        destinationVC.viewModel = PokemonDetailViewModel(pokemon: pokemonToSend, image: sprite)
+        destinationVC.viewModel = PokemonDetailViewModel(pokemon: pokemonToSend, spriteImage: sprite)
     }
 } // End of Class
 

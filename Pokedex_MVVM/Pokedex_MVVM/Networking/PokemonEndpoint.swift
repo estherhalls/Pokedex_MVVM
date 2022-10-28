@@ -17,17 +17,6 @@ enum PokemonEndpoint {
     /// needs a nextURL from within the pokemon object
     case nextURL(URL)
     
-    var endpoint: String {
-        switch self {
-        case .pokedex:
-            return "name"
-        case .pokemon:
-            return "status"
-        case .nextURL:
-            return "nextURL"
-        }
-    }
-    
     // Computed property (open scope)
     var url: URL? {
         guard var baseURL = URL.baseURL else {return nil}
