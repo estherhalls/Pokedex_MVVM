@@ -6,3 +6,10 @@
 //
 
 import Foundation
+protocol PokemonViewModelDelegate: AnyObject {
+    func configure(with pokemon: Pokemon)
+}
+
+class PokemonViewModel {
+    
+}

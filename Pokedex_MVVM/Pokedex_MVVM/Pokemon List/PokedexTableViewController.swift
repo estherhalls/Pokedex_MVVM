@@ -9,36 +9,24 @@ import UIKit
 
 class PokedexTableViewController: UITableViewController {
     
-    var pokedex: Pokedex?
-    var pokedexResults: [PokemonResults] = []
+    var pokedexViewModel: PokedexViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        NetworkingController.fetchPokedex(with: NetworkingController.initalURL!) { result in
-//            switch result {
-//            case .success(let pokedex):
-//                self.pokedex = pokedex
-//                self.pokedexResults = pokedex.results
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print("There was an error!", error.errorDescription!)
-//            }
-//        }
+        pokedexViewModel = PokedexViewModel(delegate: self)
     }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return pokedexResults.count
+        return pokedexViewModel.pokedexResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as? PokemonTableViewCell else {return UITableViewCell()}
-        let pokemonURLString = pokedexResults[indexPath.row].url
-        cell.updateViews(pokemonURlString: pokemonURLString)
+        
+        cell.viewModel = PokemonViewModel(pokedex: pokedexViewModel.pokedexResults[indexPath.row], delegate: cell)
+        
         return cell
     }
     

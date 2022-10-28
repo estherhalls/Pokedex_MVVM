@@ -7,6 +7,8 @@
 
 import Foundation
 protocol PokedexViewModelDelegate: AnyObject {
+    func pokedexResultsLoaded()
+    func encounteredAlert(error:error)
     
 }
 class PokedexViewModel {
@@ -34,12 +36,11 @@ class PokedexViewModel {
                 self.pokedex = pokedex
                 self.pokedexResults.append(contentsOf: pokedex.results)
                 self.delegate?.pokedexResultsLoaded()
-            case . failure(let error):
+            case .failure(let error):
                 print ("Error fetching data",
                 error.localizedDescription)
                 self.delegate?.encounteredAlert(error)
             }
         }
     }
-    
 }
